@@ -1,7 +1,9 @@
-const fs = require("fs")
 
-const removeLogFiles = () => {
-  const logDirectory = "./Logs"
+let fs = require("fs")
+let logDirectory = "./Logs"
+
+function removeLogFiles(){
+
   if (fs.existsSync(logDirectory)) {
     process.chdir(logDirectory)
     fs.readdir(process.cwd(), (e, files) => {
@@ -14,9 +16,7 @@ const removeLogFiles = () => {
   }
 }
 
-
-const createLogFiles = () => {
-  const logDirectory = "./Logs"
+function createLogFiles(){
   if (!fs.existsSync(logDirectory)) {
     fs.mkdirSync(logDirectory)
   }
@@ -28,6 +28,5 @@ const createLogFiles = () => {
   }
 }
 
-
-createLogFiles()
+// createLogFiles()
 removeLogFiles()

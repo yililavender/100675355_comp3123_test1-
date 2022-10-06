@@ -1,32 +1,34 @@
 
 let fs = require("fs")
-let logDirectory = "./Logs"
+// let path = require("path");
+let directory = "./Logs"
+
+
 
 function removeLogFiles(){
-
-  if (fs.existsSync(logDirectory)) {
-    process.chdir(logDirectory)
-    fs.readdir(process.cwd(), (e, files) => {
+  if (fs.existsSync(directory)) {
+    process.chdir(directory)
+    fs.readdir(process.cwd(), (e, files) => { //list all files in the directory
       files.forEach((file) => {
         fs.unlink(file, (e) =>
-          e ? console.error(`Error deleting LOG'${file}'`) : console.log(`delete files...${file}`)
+         console.log(`delete files...${file}`)
         )
       })
     })
   }
 }
 
+
 function createLogFiles(){
-  if (!fs.existsSync(logDirectory)) {
-    fs.mkdirSync(logDirectory)
+  if (!fs.existsSync(directory)) {
+    fs.mkdirSync(directory)
   }
-  process.chdir(logDirectory)
+  process.chdir(directory)
   for (let number = 0; number < 10; number++) {
-    fs.writeFile(`Log${number}.txt`, `This is the ${number}th Log file!`, (e) =>
-      e ? console.error(`Error creating Log${number}.txt`) : console.log(`Log${number}.txt`)
-    );
+    fs.writeFileSync(`Log${number}.txt`, `This is the ${number}th Log file!`) 
+    console.log(`Log${number}.txt`)
   }
 }
 
-// createLogFiles()
+createLogFiles()
 removeLogFiles()
